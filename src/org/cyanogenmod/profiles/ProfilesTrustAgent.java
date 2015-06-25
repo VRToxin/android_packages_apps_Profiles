@@ -17,6 +17,8 @@
 package org.cyanogenmod.profiles;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.Profile;
+import android.app.ProfileManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -25,9 +27,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.service.trust.TrustAgentService;
 import android.util.Log;
-
-import cyanogenmod.app.Profile;
-import cyanogenmod.app.ProfileManager;
 
 import java.lang.ref.WeakReference;
 
@@ -59,7 +58,7 @@ public class ProfilesTrustAgent extends TrustAgentService {
     @Override
     public void onCreate() {
         super.onCreate();
-        mProfileManager = ProfileManager.getInstance(this);
+        mProfileManager = (ProfileManager) getSystemService(Context.PROFILE_SERVICE);
         mHandler = new ProfileHandler(ProfilesTrustAgent.this);
 
         IntentFilter filter = new IntentFilter();
